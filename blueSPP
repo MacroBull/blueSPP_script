@@ -7,9 +7,12 @@ echo 'Scanning for' $1 '...'
 hciInfo=`hcitool scan | grep $1`
 
 if [ -n "$hciInfo" ] ; then
-	addr=${hciInfo% *}
-	echo $1 '=' $addr
-	sudo rfcomm bind '/dev/rfcomm' $addr
+	addr=`echo $hciInfo | cut -d " " -f1`
+	for i in {0..9}; do
+		[ -c /dev/rfcomm$i ] || break
+	done
+	echo $1 '=' $addr 'to' /dev/rfcomm$i
+	sudo rfcomm bind /dev/rfcomm$i $addr
  	rfcomm show /dev/rfcomm*
 
 else
