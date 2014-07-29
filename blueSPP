@@ -1,0 +1,17 @@
+#! /bin/sh
+# Blue SPP: make a serial connection to a bluetooth device
+ 
+[ $# == 0 ] && echo "Please input device name!" && exit 1
+
+echo 'Scanning for' $1 '...'
+hciInfo=`hcitool scan | grep $1`
+
+if [ -n "$hciInfo" ] ; then
+	addr=${hciInfo% *}
+	echo $1 '=' $addr
+	sudo rfcomm bind '/dev/rfcomm' $addr
+ 	rfcomm show /dev/rfcomm*
+
+else
+	echo $1 'not found'
+fi
