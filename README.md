@@ -4,6 +4,7 @@
 绑定指定的蓝牙SPP(Serial Port Profile)设备的串口到设备/dev/rfcomm上.
 
 用法:
+
 	blueSPP 设备名称
 
 使用中会申请root权限, 在 Bluez5.8 上测试通过
