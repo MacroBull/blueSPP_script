@@ -2,6 +2,7 @@
 ======
 
 绑定指定的蓝牙SPP(Serial Port Profile)设备的串口到设备/dev/rfcomm上.
+
 用法:
 	blueSPP 设备名称
 
